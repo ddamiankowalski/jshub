@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'jshub-jshub-ui',
+  selector: 'jshub-button',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './jshub-ui.component.html',
-  styleUrls: ['./jshub-ui.component.css'],
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.css'],
 })
-export class JshubUiComponent {}
+export class ButtonComponent {}
