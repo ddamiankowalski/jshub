@@ -1,1 +1,1 @@
-export * from './lib/jshub-common/jshub-common.component';
+export * from './lib/services';
