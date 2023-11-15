@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@jshub/jshub-common": ["libs/jshub-common/src/index.ts"],
       "@jshub/jshub-ui": ["libs/jshub-ui/src/index.ts"]
     }
   },
