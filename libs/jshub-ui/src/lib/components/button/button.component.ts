@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Output,
+  Component,
+  EventEmitter,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -6,6 +11,13 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.css'],
+  styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonComponent {}
+export class ButtonComponent {
+  @Output() buttonClick = new EventEmitter<void>();
+
+  public onClick(): void {
+    this.buttonClick.emit();
+  }
+}
