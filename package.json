@@ -12,6 +12,7 @@
   "author": "Damian Kowalski",
   "license": "ISC",
   "dependencies": {
+    "css.gg": "^2.1.1",
     "express": "^4.18.2"
   }
 }
