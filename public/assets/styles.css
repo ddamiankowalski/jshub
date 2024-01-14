@@ -78,3 +78,17 @@ body {
 .hub__about-github {
   font-weight: 500;
 }
+
+.hub__articles {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5rem;
+
+  .hub__article-tile {
+    flex-basis: 30%;
+    background-color: red;
+    height: 10rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px rgba(0, 0, 0, 0.2) 0px;
+  }
+}
