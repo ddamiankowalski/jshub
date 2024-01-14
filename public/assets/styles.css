@@ -1,3 +1,7 @@
+:root {
+  --main: #F0DB4F;
+}
+
 html, body, ul, li {
   margin: 0;
   padding: 0;
@@ -15,6 +19,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 
 .hub__menu-list {
@@ -27,6 +32,13 @@ body {
   .hub__menu-list-item {
     font-weight: 600;
     cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--main);
+      text-underline-offset: 0.5rem;
+      text-decoration-thickness: 0.125rem;
+    }
   }
 }
 
@@ -64,5 +76,5 @@ body {
 }
 
 .hub__about-github {
-
+  font-weight: 500;
 }
