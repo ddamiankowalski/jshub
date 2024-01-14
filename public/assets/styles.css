@@ -82,7 +82,7 @@ body {
 .hub__articles {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 4rem;
+  margin: 4rem 4rem;
 
   .hub__article-tile {
     flex-basis: 30%;
