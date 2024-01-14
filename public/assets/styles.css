@@ -82,10 +82,12 @@ body {
 .hub__articles {
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
   margin: 4rem 4rem;
 
   .hub__article-tile {
     flex-basis: 30%;
+    flex-shrink: 1;
     background-color: red;
     height: 10rem;
     border-radius: 1rem;
