@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 class RouteController {
   constructor(app, path) {
     this.app = app;
@@ -6,7 +8,11 @@ class RouteController {
 
   listen() {
     this.app.get('/', (req, res) => {
-      res.sendFile(this.path.join(__dirname, 'pages/index.html'));
+      fs.readFile(this.path.join(__dirname, 'pages/index.html'), 'utf-8', (err, data) => {
+        const modifiedHTML = data.replaceAll('{{ valuePlaceholder }}', '12');
+
+        res.send(modifiedHTML);
+      })
     });
   }
 }
