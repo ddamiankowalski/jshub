@@ -1,0 +1,3 @@
+class SSRForView extends SSRView {
+  
+}
