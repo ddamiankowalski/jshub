@@ -1,12 +1,16 @@
 const fs = require('fs');
+const { SSRViewFactory } = require('../ssr/ssr-view-factory');
 const fsPromises = fs.promises;
 
 class SSRController {
+  constructor() {
+    this.viewFactory = new SSRViewFactory();
+  }
+
   async parsePage(path) {
     const page = await fsPromises.readFile(path, 'utf-8');
     const tags = this._getAtTags(page);
     const valid = this._validateTagsStructure(tags);
-    console.log(valid);
 
     return page;
   }
@@ -25,12 +29,13 @@ class SSRController {
     console.log(tags)
     tags.forEach(tag => {
       if (this._isStartTag(tag)) {
-        result.push(tag);
+        const view = this.viewFactory.create();
+        result.push(view);
       }
 
       if (this._isEndTag(tag)) {
-        const lastEl = result[result.length - 1];
-        if (this._getEndTag(lastEl) !== tag) {
+        const lastViewEl = result[result.length - 1];
+        if (lastViewEl.endTag !== tag) {
           throw new Error('Invalid tag structure');
         } else {
           result.pop();
