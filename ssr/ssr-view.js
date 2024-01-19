@@ -4,3 +4,5 @@ class SSRView {
     this.endTag = endTag;
   }
 }
+
+module.exports = { SSRView };

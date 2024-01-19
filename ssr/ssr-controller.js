@@ -9,45 +9,44 @@ class SSRController {
 
   async parsePage(path) {
     const page = await fsPromises.readFile(path, 'utf-8');
-    const tags = this._getAtTags(page);
-    const valid = this._validateTagsStructure(tags);
+    const tagsObj = this._getAtTags(page);
+    const valid = this._validateTagsStructure(tagsObj);
 
     return page;
   }
 
   _getAtTags(page) {
-    let matches = page.match(/@\w+/g).filter(match => this._isValidTag(match));
-    return matches;
+    return [...page.matchAll(/@\w+/g)].filter(match => this._isValidTag(match)).map(match => ({ tag: match[0], index: match.index }));
   }
 
-  _isValidTag(tag) {
+  _isValidTag(match) {
+    const [tag] = match;
     return ['@for', '@endfor', '@if', '@endif'].includes(tag);
   }
 
-  _validateTagsStructure(tags) {
+  _validateTagsStructure(tagsObj) {
     const result = [];
-    console.log(tags)
-    tags.forEach(tag => {
-      if (this._isStartTag(tag)) {
-        const view = this.viewFactory.create();
-        result.push(view);
-      }
 
-      if (this._isEndTag(tag)) {
-        const lastViewEl = result[result.length - 1];
-        if (lastViewEl.endTag !== tag) {
-          throw new Error('Invalid tag structure');
-        } else {
-          result.pop();
+    tagsObj.forEach(obj => {
+        const tag = obj.tag;
+        const index = obj.index;
+
+        if (this._isStartTag(tag)) {
+            const view = this.viewFactory.create(tag);
+            result.push(view);
         }
-      }
+
+        if (this._isEndTag(tag)) {
+            const lastViewEl = result[result.length - 1];
+            if (lastViewEl.endTag !== tag) {
+                throw new Error('Invalid tag structure');
+            } else {
+                result.pop();
+            }
+        }
     })
 
     return result.length === 0;
-  }
-
-  _getEndTag(tag) {
-    return `@end${tag.slice(1)}`;
   }
 
   _isEndTag(tag) {
