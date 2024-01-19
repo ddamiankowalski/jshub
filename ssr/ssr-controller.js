@@ -9,14 +9,14 @@ class SSRController {
 
   async parsePage(path) {
     const page = await fsPromises.readFile(path, 'utf-8');
-    const tagsObj = this._getAtTags(page);
-    const valid = this._validateTagsStructure(tagsObj);
+    const matches = this._getAtMatches(page);
+    const valid = this._validateTagsStructure(matches);
 
     return page;
   }
 
-  _getAtTags(page) {
-    return [...page.matchAll(/@\w+/g)].filter(match => this._isValidTag(match)).map(match => ({ tag: match[0], index: match.index }));
+  _getAtMatches(page) {
+    return [...page.matchAll(/@\w+/g)].filter(match => this._isValidTag(match));
   }
 
   _isValidTag(match) {
@@ -24,15 +24,15 @@ class SSRController {
     return ['@for', '@endfor', '@if', '@endif'].includes(tag);
   }
 
-  _validateTagsStructure(tagsObj) {
+  _validateTagsStructure(matches) {
     const result = [];
 
-    tagsObj.forEach(obj => {
-        const tag = obj.tag;
-        const index = obj.index;
+    matches.forEach(match => {
+        const { input, index } = match;
+        const [tag] = match;
 
         if (this._isStartTag(tag)) {
-            const view = this.viewFactory.create(tag);
+            const view = this.viewFactory.create(tag, input, index);
             result.push(view);
         }
 
@@ -41,7 +41,8 @@ class SSRController {
             if (lastViewEl.endTag !== tag) {
                 throw new Error('Invalid tag structure');
             } else {
-                result.pop();
+                const view = result.pop();
+                view.buildContext(index);
             }
         }
     })

@@ -1,9 +1,19 @@
 const { SSRView } = require('./ssr-view');
 
 class SSRForView extends SSRView {
-    constructor() {
+    endIndex = null;
+
+    constructor(input, index) {
         super('@for', '@endfor');
-        console.log(this);
+
+        this.startIndex = index;
+        this.input = input;
+    }
+
+    buildContext(index) {
+        this.endIndex = index;
+        const template = this.input.slice(this.startIndex, this.endIndex);
+        console.log(template);
     }
 }
 

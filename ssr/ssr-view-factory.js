@@ -2,12 +2,12 @@ const { SSRForView } = require('./ssr-forview');
 const { SSRIfView } = require('./ssr-if-view');
 
 class SSRViewFactory {
-    create(tag) {
+    create(tag, input, index) {
         switch (tag) {
             case '@for':
-                return new SSRForView(tag);
+                return new SSRForView(input, index);
             case '@if':
-                return new SSRIfView(tag);
+                return new SSRIfView();
         }
     }
 }
