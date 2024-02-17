@@ -30,7 +30,8 @@ class SSRHome {
     }
 
     async _parseDecorator(decorator) {
-        this._pageFile = await this._pageFile.replaceAll(decorator.raw, this[decorator.name]());
+        const text = await this[decorator.name]();
+        this._pageFile = this._pageFile.replaceAll(decorator.raw, text);
     }
 
     async renderArticles() {

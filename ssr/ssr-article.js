@@ -10,13 +10,11 @@ class SSRArticle {
     }
 
     async parse() {
-        const file = await this._readFile();
-        console.log(file)
-        return file;
+        return await this._readFile();
     }
 
     async _readFile() {
-        this._pageFile = await fsPromises.readFile(this._path, 'utf-8'); 
+        return await fsPromises.readFile(this._path, 'utf-8'); 
     }
 }
 
