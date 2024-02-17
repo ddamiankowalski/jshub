@@ -2,17 +2,14 @@ const fs = require('fs');
 const { SSRController } = require('../ssr/ssr-controller');
 
 class RouteController {
-  constructor(app, path) {
+  constructor(app) {
     this.ssrController = new SSRController();
     this.app = app;
-    this.path = path;
   }
 
   listen() {
-    this.app.get('/', async (req, res) => {
-      const parsed = await this.ssrController.parsePage(this.path.join(__dirname, 'pages/index.html'));
-      res.send(parsed);
-    });
+    this.app.get('/', async (req, res) => 
+      res.send(await this.ssrController.parsePage('home')));
   }
 }
 

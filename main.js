@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require('path');
 
 const { RouteController } = require("./routes/route-controller");
 
@@ -8,9 +7,9 @@ const port = 3000;
 
 app.use(express.static('public'))
 
-const controller = new RouteController(app, path);
+const controller = new RouteController(app);
 controller.listen();
 
 app.listen(port, () => {
-  console.log('Example app listening');
+  console.log(`Listening on port: ${port}`);
 });

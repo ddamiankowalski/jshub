@@ -1,62 +1,35 @@
 const fs = require('fs');
-const { SSRViewFactory } = require('../ssr/ssr-view-factory');
 const fsPromises = fs.promises;
+const path = require('path');
+
+const { SSRHome } = require('./ssr-home');
 
 class SSRController {
-  constructor() {
-    this.viewFactory = new SSRViewFactory();
+  _pathPrefix = '../routes/pages/';
+
+  async parsePage(pageName) {
+    const pagePath = this._getPagePath(pageName);
+    const pageFile = await fsPromises.readFile(pagePath, 'utf-8'); 
+
+    return await this._parsePage(pageFile, pageName);
   }
 
-  async parsePage(path) {
-    const page = await fsPromises.readFile(path, 'utf-8');
-    const matches = this._getAtMatches(page);
-    const valid = this._validateTagsStructure(matches);
-
-    return page;
+  _getPagePath(pageName) {
+    switch(pageName) {
+      case 'home': 
+        return path.join(__dirname, this._pathPrefix + 'home.html');
+    }
   }
 
-  _getAtMatches(page) {
-    return [...page.matchAll(/@\w+/g)].filter(match => this._isValidTag(match));
-  }
+  _parsePage(pageFile, pageName) {
+    let ssr;
 
-  _isValidTag(match) {
-    const [tag] = match;
-    return ['@for', '@endfor', '@if', '@endif'].includes(tag);
-  }
-
-  _validateTagsStructure(matches) {
-    const result = [];
-
-    matches.forEach(match => {
-        const { input, index } = match;
-        const [tag] = match;
-
-        if (this._isStartTag(tag)) {
-            const view = this.viewFactory.create(tag, input, index);
-            result.push(view);
-        }
-
-        if (this._isEndTag(tag)) {
-            const lastViewEl = result[result.length - 1];
-            if (lastViewEl.endTag !== tag) {
-                throw new Error('Invalid tag structure');
-            } else {
-                const view = result.pop();
-                view.buildContext(index);
-            }
-        }
-    })
-
-    return result.length === 0;
-  }
-
-  _isEndTag(tag) {
-    return tag.slice(1, 4) === 'end';
-  }
-
-  _isStartTag(tag) {
-    return tag.slice(1, 4) !== 'end';
+    switch(pageName) {
+      case 'home':
+        ssr = new SSRHome(pageFile);
+        return ssr.parse();
+    }
   }
 }
 
-module.exports = { SSRController }
+module.exports = { SSRController };
