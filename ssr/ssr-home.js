@@ -35,19 +35,18 @@ class SSRHome {
     }
 
     async renderArticles() {
-        const ssr = new SSRArticle();
-        return await ssr.parse();
+        let result = '';
+
+        for(let i = 0; i < 60; i++) {
+            const ssr = new SSRArticle('What is ECMAScript? A closer look at Promise object and the way it works');
+            result += await ssr.parse();
+        }
+
+        return result;
     }
 
     valuePlaceholder() {
         return 'dupa';
-    }
-
-    getPostImage() {
-        return `
-            background: linear-gradient(to bottom, rgba(217, 217, 217, 0.125), rgba(0, 0, 0, 0.75)), url('assets/img/articles/1.png'); 
-            background-size: cover; 
-            background-position: center;`
     }
 }
 
