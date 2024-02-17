@@ -33,9 +33,9 @@ class SSRHome {
         this._pageFile = await this._pageFile.replaceAll(decorator.raw, this[decorator.name]());
     }
 
-    renderArticles() {
+    async renderArticles() {
         const ssr = new SSRArticle();
-        return ssr.parse();
+        return await ssr.parse();
     }
 
     valuePlaceholder() {

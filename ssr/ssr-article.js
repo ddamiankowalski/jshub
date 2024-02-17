@@ -1,27 +1,22 @@
-class SSRArticle {
-    parse() {
-        return `
-        <div class="hub__article-tile">
-            <div class="hub__article-tile-description">
-            <span class="hub__article-title"> How closures can change the world... or at least change your code</span>
-            <div class="hub__article-buttons">
-                <div class="hub__article-button">
-                <div class="hub__article-button-icon">
-                    <i class="gg-heart"></i>
-                </div>
+const fs = require('fs');
+const fsPromises = fs.promises;
+const path = require('path');
 
-                <span class="hub__article-button-value">@@valuePlaceholder@@</span>
-                </div>
-                <div class="hub__article-button">
-                <div class="hub__article-button-icon">
-                    <i class="gg-comment"></i>
-                </div>
-                <span class="hub__article-button-value">@@valuePlaceholder@@</span>
-                </div>
-            </div>
-            </div>
-        </div>
-        `
+class SSRArticle {
+    _pathPrefix = '../routes/views/';
+    
+    constructor() {
+        this._path = path.join(__dirname, this._pathPrefix + 'articles.html');
+    }
+
+    async parse() {
+        const file = await this._readFile();
+        console.log(file)
+        return file;
+    }
+
+    async _readFile() {
+        this._pageFile = await fsPromises.readFile(this._path, 'utf-8'); 
     }
 }
 
