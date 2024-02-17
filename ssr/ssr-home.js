@@ -1,13 +1,15 @@
+const { SSRArticle } = require('./ssr-article');
+
 class SSRHome {
     constructor(pageFile) {
         this._pageFile = pageFile;
     }
 
-    parse() {
+    async parse() {
         let decorator = this._getDecorator();
 
         while(decorator) {
-            this._parseDecorator(decorator);
+            await this._parseDecorator(decorator);
             decorator = this._getDecorator();
         }
 
@@ -27,8 +29,13 @@ class SSRHome {
         return { raw, name: raw.slice(2, -2).trim(), len: raw.length, index };
     }
 
-    _parseDecorator(decorator) {
-        this._pageFile = this._pageFile.replaceAll(decorator.raw, this[decorator.name]());
+    async _parseDecorator(decorator) {
+        this._pageFile = await this._pageFile.replaceAll(decorator.raw, this[decorator.name]());
+    }
+
+    renderArticles() {
+        const ssr = new SSRArticle();
+        return ssr.parse();
     }
 
     valuePlaceholder() {

@@ -21,13 +21,13 @@ class SSRController {
     }
   }
 
-  _parsePage(pageFile, pageName) {
+  async _parsePage(pageFile, pageName) {
     let ssr;
 
     switch(pageName) {
       case 'home':
         ssr = new SSRHome(pageFile);
-        return ssr.parse();
+        return await ssr.parse();
     }
   }
 }
