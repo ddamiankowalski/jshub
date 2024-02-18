@@ -12,6 +12,10 @@ html, body, ul, li {
   font-smooth: always;
 }
 
+a {
+  all: unset;
+}
+
 body {
   margin: 3rem 8rem;
 }
