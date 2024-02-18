@@ -13,7 +13,8 @@ class DBController {
             host: 'localhost',
             user: 'root',
             database: 'jshub',
-            password: 't4jn3h4slo'
+            password: 't4jn3h4slo',
+            database: 'jshub'
         });
     }
 }
