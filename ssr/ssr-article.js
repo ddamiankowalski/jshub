@@ -45,6 +45,14 @@ class SSRArticle {
     return this._article.author;
   }
 
+  getArticleLikes() {
+    return this._article.likes;
+  }
+
+  getArticleComments() {
+    return this._article.comments;
+  }
+
   getArticleImage() {
     let styles = 'style="'
     styles += `background: linear-gradient(to bottom, rgba(217, 217, 217, 0.125), rgba(0, 0, 0, 0.75)), url('/assets/img/articles/1.png');`;
