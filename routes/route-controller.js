@@ -2,10 +2,9 @@ const fs = require('fs');
 const { SSRController } = require('../ssr/ssr-controller');
 
 class RouteController {
-  constructor(app, resource) {
-    this.ssrController = new SSRController();
+  constructor(app, api) {
+    this.ssrController = new SSRController(api);
     this._app = app;
-    this._resource = resource;
   }
 
   listen() {

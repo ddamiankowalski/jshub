@@ -7,6 +7,10 @@ const { SSRHome } = require('./ssr-home');
 class SSRController {
   _pathPrefix = '../routes/pages/';
 
+  constructor(api) {
+    this._api = api;
+  }
+
   async parsePage(pageName) {
     const pagePath = this._getPagePath(pageName);
     const pageFile = await fsPromises.readFile(pagePath, 'utf-8'); 
@@ -26,7 +30,7 @@ class SSRController {
 
     switch(pageName) {
       case 'home':
-        ssr = new SSRHome(pageFile);
+        ssr = new SSRHome(pageFile, this._api);
         return await ssr.parse();
     }
   }

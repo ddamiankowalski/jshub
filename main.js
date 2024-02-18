@@ -1,15 +1,18 @@
 const express = require("express");
 
 const { RouteController } = require("./routes/route-controller");
-const { ResourceController } = require('./backend/resource-controller');
+const { ApiController } = require('./backend/api-controller');
 
 const app = express();
 const port = 3000;
 
 app.use(express.static('public'))
+app.use(express.json());
 
-const resource = new ResourceController();
-const controller = new RouteController(app, resource);
+const api = new ApiController();
+app.use('/api', api.getApp());
+
+const controller = new RouteController(app, api);
 
 controller.listen();
 

@@ -1,7 +1,8 @@
 const { SSRArticle } = require('./ssr-article');
 
 class SSRHome {
-    constructor(pageFile) {
+    constructor(pageFile, api) {
+        this._api = api;
         this._pageFile = pageFile;
     }
 
@@ -36,17 +37,14 @@ class SSRHome {
 
     async renderArticles() {
         let result = '';
+        const articles = await this._api.getArticles();
 
-        for(let i = 0; i < 60; i++) {
-            const ssr = new SSRArticle('What is ECMAScript? A closer look at Promise object and the way it works');
+        for(let i = 0; i < articles.length; i++) {
+            const ssr = new SSRArticle(articles[i].title);
             result += await ssr.parse();
         }
 
         return result;
-    }
-
-    valuePlaceholder() {
-        return 'dupa';
     }
 }
 
