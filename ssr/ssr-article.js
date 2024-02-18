@@ -59,7 +59,7 @@ class SSRArticle {
 
     getTileStyles() {
         let styles = 'style="'
-        styles += `background: linear-gradient(to bottom, rgba(217, 217, 217, 0.125), rgba(0, 0, 0, 0.75)), url('assets/img/articles/1.png');`;
+        styles += `background: linear-gradient(to bottom, rgba(217, 217, 217, 0.125), rgba(0, 0, 0, 0.75)), url('/assets/img/articles/1.png');`;
         styles += `background-size: cover;background-position: center;"`;
     
         return styles;
