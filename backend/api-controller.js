@@ -18,6 +18,11 @@ class ApiController {
         return await this._db.sendQuery('SELECT * FROM articles');
     }
 
+    async getArticle(id) {
+        const [article] = await this._db.sendQuery(`SELECT * FROM articles WHERE id = '${id}'`);
+        return article;
+    }
+
     _buildRoutes() {
         this._app.post('/article', (req, res) => this._postArticle(req, res));
         this._app.delete('/article/:id', (req, res) => this._deleteArticle(req, res));

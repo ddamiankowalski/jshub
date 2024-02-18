@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+    <script defer src="/scripts/home.js"></script>
+    <title>JShub</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    <header class="hub__header">
+      <div class="hub__logo">
+        <img class="hub__logo-img" src="/img/logo.png" />
+        <div class="hub__logo-text">
+          <span class="hub__logo-text--prefix">hub</span>
+          <span class="hub__logo-text--suffix">.dev</span>
+        </div>
+      </div>
+
+      <menu class="hub__menu">
+        <ul class="hub__menu-list">
+          <li class="hub__menu-list-item">
+            <a href="/category/tutorials">Tutorials</a>
+          </li>
+          <li class="hub__menu-list-item">
+            <a href="/category/articles">Articles</a>
+          </li>
+          <li class="hub__menu-list-item">
+            <a href="/category/ecmascript">ECMAScript</a>
+          </li>
+          <li class="hub__menu-list-item">
+            <a href="/category/angular">Angular</a>
+          </li>
+          <li class="hub__menu-list-item">
+            <a href="/categiry/react">React</a>
+          </li>
+          <li class="hub__menu-list-item">
+            <a href="/category/nodejs">Node.js</a>
+          </li>
+        </ul>
+      </menu>
+
+      <div class="hub__about">
+        <img src="/img/author.png" />
+        <span class="hub__about-github">GitHub</span>
+      </div>
+    </header>
+
+    <section class="hub__article">
+      <h1 class="hub__article-header">@@getArticleTitle@@</h1>
+      <div class="hub__article-info">
+        <div class="hub__article-author-info">
+          <span class="hub__article-min">12 min read</span>
+          <span class="hub__article-author">@@getArticleAuthor@@</span>
+        </div>
+        <div class="hub__article-info-icons">
+          <div class="hub__article-button-icon">
+            <i class="gg-heart"></i>
+          </div>
+          <div class="hub__article-button-icon">
+            <i class="gg-comment"></i>
+          </div>
+        </div>
+      </div>
+      <div class="hub__article-image" @@getArticleImage@@></div>
+    </section>
+  </body>
+</html>

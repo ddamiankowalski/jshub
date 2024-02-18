@@ -14,7 +14,9 @@ class RouteController {
     this._app.get('/category/:name', async (req, res) => {
       const { name } = req.params;
       await this._routeFor(name, res);
-    })
+    });
+
+    this._app.get('/article', async (req, res) => res.send(await this.ssrController.parsePage('article', req, res)));
   }
 
   async _routeFor(name, res) {

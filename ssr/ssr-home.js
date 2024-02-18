@@ -1,4 +1,4 @@
-const { SSRArticle } = require('./ssr-article');
+const { SSRTile } = require('./ssr-tile');
 
 class SSRHome {
     constructor(pageFile, api) {
@@ -40,7 +40,7 @@ class SSRHome {
         const articles = await this._api.getArticles();
 
         for(let i = 0; i < articles.length; i++) {
-            const ssr = new SSRArticle(articles[i].title);
+            const ssr = new SSRTile(articles[i]);
             result += await ssr.parse();
         }
 
