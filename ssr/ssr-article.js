@@ -60,6 +60,10 @@ class SSRArticle {
     
     return styles;
   }
+
+  getArticleText() {
+    return 'Closures in JavaScript are one of those concepts that many struggle to get their heads around and more importantly to recall it in the future. In the following post, I will explain in clear terms what closure is, and relate it to a real world example making it easier to remember.';
+  }
 }
 
 module.exports = { SSRArticle };
