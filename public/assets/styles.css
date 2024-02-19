@@ -151,7 +151,11 @@ body {
         transition: opacity .3s;
 
         .gg-comment {
-          transform: scale(0.8) translateY(-0.125rem);
+          scale: 0.6125;
+        }
+
+        .gg-heart {
+          scale: 0.75;
         }
       }
 
@@ -196,6 +200,9 @@ body {
     font-size: 2.5rem;
     font-weight: 800;
     color: #2F2F2F;
+
+    animation-name: fade-in;
+    animation-duration: .8s;
   }
 
   .hub__article-info {
@@ -204,6 +211,9 @@ body {
     gap: 0.75rem;
     font-size: 0.875rem;
     margin: 1rem 0;
+
+    animation-name: fade-in-delay;
+    animation-duration: .7s;
 
     .hub__article-author-info {
       display: flex;
@@ -252,8 +262,12 @@ body {
         }
       }
 
-      i {
+      .gg-comment {
         scale: 0.6125;
+      }
+
+      .gg-heart {
+        scale: 0.75;
       }
     }
   }
@@ -264,5 +278,34 @@ body {
     min-width: 750px;
     height: 20rem;
     border-radius: 1rem;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-delay {
+  0% {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+
+  50% {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
