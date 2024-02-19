@@ -28,7 +28,7 @@ class SSRTile {
     }
 
     _getDecorator() {
-        const match = /@@(.)*@@/.exec(this._pageFile);
+        const match = /@@(?!.*@.*@@).*@@/.exec(this._pageFile);
 
         if(!match) {
             return null;
@@ -41,6 +41,13 @@ class SSRTile {
     }
 
     async _parseDecorator(decorator) {
+        const decoratorFn = this[decorator.name];
+
+        if (!decoratorFn) {
+            console.log(decorator.name);
+            throw new Error(decorator.name);
+        }
+
         const text = await this[decorator.name]();
         this._pageFile = this._pageFile.replaceAll(decorator.raw, text);
     }
@@ -63,6 +70,10 @@ class SSRTile {
         styles += `background-size: cover;background-position: center;"`;
     
         return styles;
+    }
+
+    getTileId() {
+        return this._article.id;
     }
 }
 

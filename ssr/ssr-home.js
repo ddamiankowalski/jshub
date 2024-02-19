@@ -18,7 +18,7 @@ class SSRHome {
     }
 
     _getDecorator() {
-        const match = /@@(.)*@@/.exec(this._pageFile);
+        const match = /@@(?!.*@.*@@).*@@/.exec(this._pageFile);
 
         if(!match) {
             return null;
